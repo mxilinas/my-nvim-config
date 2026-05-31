@@ -1,0 +1,7 @@
+require("config.lazy")
+require("config.autocommands")
+require("config.keymaps")
+require("config.sets")
+require("config.lsp")
+
+vim.cmd.colorscheme("gruvbox")
