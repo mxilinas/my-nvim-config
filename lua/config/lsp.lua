@@ -58,7 +58,7 @@ local setup_lsp_attach = function(args)
 			desc = "Previous diagnostic",
 		},
 		-- LSP actions
-		{ "<F2>", vim.lsp.buf.rename, desc = "Rename symbol" },
+		{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol" },
 		{ "<F3>", vim.lsp.buf.code_action, desc = "Code action" },
 		{ "gd", vim.lsp.buf.definition, desc = "Go to definition" },
 		{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },

@@ -35,6 +35,7 @@ return {
 			{ "<leader>fm", builtin.marks, desc = "Telescope marks" },
 			{ "<leader>fq", builtin.quickfix, desc = "Telescope quickfix" },
 			{ "<leader>fr", builtin.lsp_references, desc = "Telescope quickfix" },
+			{ "<leader>fk", builtin.keymaps, desc = "Telescope keymaps" },
 			{ "<leader>fi", builtin.lsp_incoming_calls, desc = "Telescope incoming" },
 			{ "<leader>fo", builtin.lsp_outgoing_calls, desc = "Telescope outgoing" },
 			{ "<leader>fs", builtin.lsp_document_symbols, desc = "Telescope symbols" },

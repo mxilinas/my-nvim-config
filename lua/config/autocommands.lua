@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 vim.api.nvim_create_autocmd({ "Filetype" }, {
     pattern = "python",
     callback = function(args)
-        vim.keymap.set("n", "<F5>", "<Cmd>:w<Cr><Cmd>!python %:p<Cr>", {
+        vim.keymap.set("n", "<leader>rp", "<Cmd>:w<Cr><Cmd>!python %:p<Cr>", {
             buffer = args.buf,
             desc = "Run the current python file",
         })
