@@ -71,8 +71,8 @@ map("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Tab navigation
-map("n", "<Tab>", "<cmd>tabnext<cr>", { desc = "Next tab" })
-map("n", "<S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous tab" })
+map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "<S-Tab>", "<cmd>bprev<cr>", { desc = "Previous buffer" })
 
 -- Jump to start/end of line
 map("n", "0", "^", { desc = "Jump to first character of the line" })

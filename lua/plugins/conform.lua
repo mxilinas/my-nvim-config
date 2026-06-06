@@ -14,9 +14,9 @@ return {
 		{
 			"<leader>lf",
 			function()
-				require("conform").format()
+				require("conform").format({lsp_format = "fallback"})
 			end,
-			{ "n", "v" },
+			mode = { "n", "v", },
 			desc = "conform format",
 		},
 	},

@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd({ "Filetype" }, {
-    pattern = "typescriptreact",
+    pattern = {"typescriptreact", "javascriptreact", "css"},
     callback = function()
         vim.bo.fo = "tcroq"
         vim.bo.tabstop = 2
