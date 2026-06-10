@@ -7,7 +7,13 @@ return {
 	},
 	opts = {
 		defaults = {
-			layout_strategy = "horizontal",
+			layout_strategy = "flex",
+			layout_config = {
+				height = .99,
+				width = .99,
+				prompt_position = "bottom",
+				preview_cutoff = 0,
+			},
 		},
 		preview = {
 			treesitter = false, -- Fixes stupid error.
@@ -43,7 +49,8 @@ return {
 			{ "<leader>ft", builtin.treesitter, desc = "Telescope treesitter" },
 		}
 	end,
-	config = function()
+	config = function(_, opts)
+		require("telescope").setup(opts)
 		require("telescope").load_extension("fzf")
 	end,
 }
