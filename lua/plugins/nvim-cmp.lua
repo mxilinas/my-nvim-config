@@ -61,6 +61,9 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = {
+				per_filetype = {
+					codecompanion = { "codecompanion" },
+				},
 				{ name = "luasnip" },
 				{ name = "lazydev" },
 				{ name = "nvim_lsp" },

@@ -59,7 +59,7 @@ local setup_lsp_attach = function(args)
 		},
 		-- LSP actions
 		{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol" },
-		{ "<F3>", vim.lsp.buf.code_action, desc = "Code action" },
+		{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code action" },
 		{ "gd", vim.lsp.buf.definition, desc = "Go to definition" },
 		{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
 		{ "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },

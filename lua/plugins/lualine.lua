@@ -7,11 +7,8 @@ return {
 				icons_enabled = false,
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
-				always_show_tabline = true,
 			},
-			sections = {},
-			inactive_sections = {},
-			tabline = {
+			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = {
@@ -23,11 +20,16 @@ return {
 						end,
 					},
 				},
-				lualine_x = { "filetype" },
+				lualine_x = {
+					"filetype",
+					{
+                        require("extra.codecompanion-lualine")
+					},
+				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},
-			inactive_tabline = {
+			inactive_sections = {
 				lualine_c = { "filename" },
 				lualine_x = { "location" },
 			},
