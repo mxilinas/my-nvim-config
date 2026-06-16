@@ -14,12 +14,14 @@ local function get_max_severity()
 end
 
 local setup_lsp_attach = function(args)
-	vim.o.signcolumn = "yes"
-	vim.o.winborder = "single"
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	if not client then
 		return
 	end
+
+	vim.o.signcolumn = "yes"
+	vim.o.winborder = "single"
+
 	wk.add({
 		{
 			"]d",
@@ -110,3 +112,6 @@ vim.diagnostic.config({
 	float = true,
 	severity_sort = true,
 })
+
+require("config.lsp.languages.lua_ls")
+require("config.lsp.languages.pyright")

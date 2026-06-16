@@ -12,7 +12,7 @@ return {
 				end
 			end, { desc = "next hunk" })
 
-			vim.keymap.set("n", "[c", function()
+			vim.keymap.set("n", "[h", function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "[c", bang = true })
 				else
@@ -54,4 +54,7 @@ return {
 			vim.keymap.set({ "o", "x" }, "ih", gitsigns.select_hunk)
 		end,
 	},
+    config = function ()
+        require("gitsigns").setup()
+    end
 }

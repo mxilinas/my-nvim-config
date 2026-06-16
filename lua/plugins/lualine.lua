@@ -23,14 +23,14 @@ return {
 				lualine_x = {
 					"filetype",
 					{
-                        require("extra.codecompanion-lualine")
+						require("extra.codecompanion-lualine"),
 					},
 				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},
 			inactive_sections = {
-				lualine_c = { "filename" },
+				lualine_c = { { "filename", file_status = true, path = 2 } },
 				lualine_x = { "location" },
 			},
 		})
