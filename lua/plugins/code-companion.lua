@@ -8,7 +8,7 @@ return {
 		adapters = {
 			http = {
 				opts = {
-                    show_defaults = false,
+					show_defaults = false,
 					show_model_choices = true,
 					show_presets = false,
 				},
@@ -24,11 +24,11 @@ return {
 			},
 			acp = {
 				opts = {
-                    show_defaults = false,
+					show_defaults = false,
 					show_model_choices = true,
 					show_presets = false,
 				},
-                -- Must have codex acp binary on path for this to work.
+				-- Must have codex acp binary on path for this to work.
 				codex = function()
 					return require("codecompanion.adapters").extend("codex", {
 						defaults = {

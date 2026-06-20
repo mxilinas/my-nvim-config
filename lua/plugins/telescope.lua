@@ -7,12 +7,21 @@ return {
 	},
 	opts = {
 		defaults = {
+			results_title = false,
+			prompt_title = false,
+			path_display = {
+				shorten = 3,
+			},
+			dymamic_preview_title = true,
+			scroll_strategy = "limit",
 			layout_strategy = "flex",
 			layout_config = {
-				height = .99,
-				width = .99,
+				height = 0.99,
+				width = 0.99,
 				prompt_position = "bottom",
-				preview_cutoff = 0,
+				horizontal = {
+					preview_width = 80,
+				},
 			},
 		},
 		preview = {

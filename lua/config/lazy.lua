@@ -22,6 +22,7 @@ require("lazy").setup({
 	spec = { { import = "plugins" } },
 	install = { colorscheme = { "gruvbox" } },
 	checker = { enabled = false },
+	rocks = { enabled = false },
 	change_detection = {
 		enabled = true,
 		notify = false,

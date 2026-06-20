@@ -6,6 +6,12 @@ return {
 	opts = {},
 	config = function()
 		require("ibl").setup({
+			exclude = {
+				filetypes = {
+					"dashboard",
+					"oil",
+				},
+			},
 			scope = { enabled = true },
 		})
 	end,
