@@ -5,6 +5,6 @@ return {
 	build = "cd app && npm install",
     config = function ()
         vim.g.mkdp_combine_preview = 0
-        vim.keymap.set("n", "<leader>m", "<Plug>MarkdownPreviewToggle<Plug>", {desc = "Toggle Markdown-Preview"})
+        -- vim.keymap.set("n", "<leader>m", "<Plug>MarkdownPreviewToggle<Plug>", {desc = "Toggle Markdown-Preview"})
     end
 }

@@ -1,4 +1,3 @@
-local wk = require("which-key")
 
 
 local function rm_map(lhs, modes, buf)
@@ -25,6 +24,8 @@ local function get_max_severity()
 end
 
 local setup_lsp_attach = function(args)
+    local wk = require("which-key")
+
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	if not client then
 		return
@@ -111,10 +112,11 @@ local setup_lsp_attach = function(args)
 		},
 	})
 
-    rm_map("gri", "n")
-    rm_map("gra", { "n", "v" })
-    rm_map("grr", "n")
 end
+
+rm_map("gri", "n")
+rm_map("gra", { "n", "v" })
+rm_map("grr", "n")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = setup_lsp_attach,

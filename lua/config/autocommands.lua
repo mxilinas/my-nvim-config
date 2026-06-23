@@ -1,4 +1,4 @@
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "typescriptreact", "javascriptreact", "css" },
 	callback = function()
 		vim.bo.fo = "tcroq"
@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "cpp" },
 	callback = function(args)
 		vim.bo.tabstop = 2
@@ -16,16 +16,16 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 		vim.o.expandtab = true
 		vim.keymap.set("n", "<leader>rr", "<Cmd>:w<Cr><Cmd>make run<Cr>", {
 			buffer = args.buf,
-			desc = "Run the current python file",
+			desc = "Run the current cpp file",
 		})
 		vim.keymap.set("n", "<leader>rR", "<Cmd>:w<Cr><Cmd>silent make run<Cr>", {
 			buffer = args.buf,
-			desc = "Run the current python file",
+			desc = "Run the current cpp file silently",
 		})
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = "python",
 	callback = function(args)
 		vim.keymap.set("n", "<leader>rp", "<Cmd>:w<Cr><Cmd>!python %:p<Cr>", {
@@ -35,13 +35,13 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "Filetype" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = "help",
 	callback = function()
-		vim.o.signcolumn = "no"
-		vim.o.colorcolumn = ""
-		vim.o.number = false
-		vim.o.relativenumber = false
+		vim.wo.signcolumn = "no"
+		vim.wo.colorcolumn = ""
+		vim.wo.number = false
+		vim.wo.relativenumber = false
 	end,
 })
 

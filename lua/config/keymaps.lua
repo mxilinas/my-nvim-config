@@ -3,7 +3,6 @@ local map = vim.keymap.set
 map("n", "<Leader>bs", function()
     local buf = vim.api.nvim_create_buf(true, true) -- listed = true, scratch = true
     vim.api.nvim_set_current_buf(buf)
-    vim.cmd.tabnew()
 end, { desc = "Open a new scratch buffer" })
 
 map("n", "<Leader>e", "<Cmd>Oil<CR>", { desc = "Open file explorer" })
@@ -11,7 +10,7 @@ map("n", "<Leader>e", "<Cmd>Oil<CR>", { desc = "Open file explorer" })
 map("n", "<Leader>`", function()
     local config = vim.fn.stdpath("config")
     vim.cmd.edit(config)
-    vim.cmd("cd " .. config)
+    vim.cmd("cd " .. vim.fn.fnameescape(config))
 end, { desc = "Open config" })
 
 map("n", "<Leader>cdr", function()
@@ -21,7 +20,7 @@ map("n", "<Leader>cdr", function()
     local clients = vim.lsp.get_clients({ bufnr = buf })
     for _, client in ipairs(clients) do
         if client and client.root_dir then
-            vim.cmd("cd " .. client.root_dir)
+            vim.cmd("cd " .. vim.fn.fnameescape(client.root_dir))
             return
         end
     end
@@ -30,7 +29,7 @@ map("n", "<Leader>cdr", function()
     local root = vim.fs.root(buf, { ".git", "lua", "package.json", "go.mod" })
 
     if root then
-        vim.cmd("cd " .. root)
+        vim.cmd("cd " .. vim.fn.fnameescape(root))
     else
         vim.notify("No project root found", vim.log.levels.WARN)
     end

@@ -1,7 +1,6 @@
 return {
 	"folke/lazydev.nvim",
 	ft = "lua",
-	lazy = false,
 	opts = {
 		lspconfig = true,
 		cmp = true,

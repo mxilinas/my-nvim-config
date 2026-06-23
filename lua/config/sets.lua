@@ -13,7 +13,6 @@ vim.o.expandtab = true
 vim.o.hlsearch = false
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.hlsearch = false
 
 vim.o.textwidth = 80
 vim.o.smartindent = false
