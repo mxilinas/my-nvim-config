@@ -46,13 +46,13 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "qf",
-  callback = function()
-	vim.keymap.set("n", "<CR>", "<CR><C-w>p", {
-		buffer = true,
-		remap = false,
-		silent = true,
-		desc = "Go to the item under the cursor; stay in the qf window.",
-	})
-  end,
+	pattern = "qf",
+	callback = function()
+		vim.keymap.set("n", "<CR>", "<CR><C-w>p", {
+			buffer = true,
+			remap = false,
+			silent = true,
+			desc = "Go to the item under the cursor; stay in the qf window.",
+		})
+	end,
 })

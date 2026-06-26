@@ -80,3 +80,6 @@ map("n", "^", "0", { desc = "Jump to first character (alternative)" })
 -- Command-line navigation
 map("c", "<Tab>", "<Up>", { desc = "Previous command" })
 map("c", "<S-Tab>", "<Down>", { desc = "Next command" })
+
+-- Open terminal
+map("n", "<leader>t", "<cmd>terminal<cr>", { desc = "Open Terminal" })
