@@ -1,12 +1,17 @@
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
+		{ "Gelio/cmp-natdat", config = true },
 		"neovim/nvim-lspconfig",
+		"tzachar/cmp-ai",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"lukas-reineke/cmp-rg",
 		"hrsh7th/cmp-cmdline",
+		"amarakon/nvim-cmp-buffer-lines",
 		"hrsh7th/nvim-cmp",
+		"hrsh7th/cmp-calc",
 		"L3MON4D3/LuaSnip",
 	},
 	config = function()
@@ -14,6 +19,12 @@ return {
 		local luasnip = require("luasnip")
 
 		cmp.setup({
+			formatting = {
+				format = function(entry, vim_item)
+					vim_item.menu = "[" .. entry.source.name .. "]"
+					return vim_item
+				end,
+			},
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -61,11 +72,16 @@ return {
 				per_filetype = {
 					codecompanion = { "codecompanion" },
 				},
+				-- { name = "cmp_ai" },
 				{ name = "luasnip" },
-				{ name = "lazydev", group_index = 0 },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },
+				{ name = "buffer-lines" },
+				{ name = "rg" },
 				{ name = "path" },
+				{ name = "calc" },
+				{ name = "natdat" },
+				{ name = "lazydev", group_index = 0 },
 			},
 		})
 		cmp.setup.cmdline(":", {
