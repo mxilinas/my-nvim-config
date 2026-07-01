@@ -22,6 +22,11 @@ return {
 				lualine_x = {
 					"filetype",
 					{
+						function()
+							return require("plugins.cmp-ai").status()
+						end,
+					},
+					{
 						require("extra.codecompanion-lualine"),
 					},
 				},

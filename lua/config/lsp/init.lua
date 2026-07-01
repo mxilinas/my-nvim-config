@@ -1,5 +1,3 @@
-
-
 local function rm_map(lhs, modes, buf)
 	if type(modes) == "string" then
 		modes = { modes }
@@ -8,7 +6,6 @@ local function rm_map(lhs, modes, buf)
 		pcall(vim.keymap.del, mode, lhs, { buffer = buf })
 	end
 end
-
 
 --- Return the severity-level of the highest existing severity.
 local function get_max_severity()
@@ -24,7 +21,7 @@ local function get_max_severity()
 end
 
 local setup_lsp_attach = function(args)
-    local wk = require("which-key")
+	local wk = require("which-key")
 
 	local client = vim.lsp.get_client_by_id(args.data.client_id)
 	if not client then
@@ -111,7 +108,6 @@ local setup_lsp_attach = function(args)
 			mode = "i",
 		},
 	})
-
 end
 
 rm_map("gri", "n")

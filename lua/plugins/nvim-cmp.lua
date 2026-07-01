@@ -19,6 +19,15 @@ return {
 		local luasnip = require("luasnip")
 
 		cmp.setup({
+			window = {
+				completion = cmp.config.window.bordered({
+					border = "rounded",
+					scrollbar = true,
+				}),
+				document_symbolmentation = cmp.config.window.bordered({
+					border = "rounded",
+				}),
+			},
 			formatting = {
 				format = function(entry, vim_item)
 					vim_item.menu = "[" .. entry.source.name .. "]"
@@ -36,6 +45,16 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+				["<C-a>"] = cmp.mapping(
+					cmp.mapping.complete({
+						config = {
+							sources = cmp.config.sources({
+								{ name = "cmp_ai" },
+							}),
+						},
+					}),
+					{ "i" }
+				),
 				["<CR>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						if luasnip.expandable() then
@@ -72,7 +91,6 @@ return {
 				per_filetype = {
 					codecompanion = { "codecompanion" },
 				},
-				-- { name = "cmp_ai" },
 				{ name = "luasnip" },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },
