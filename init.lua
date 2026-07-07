@@ -5,8 +5,11 @@ vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
-	install = { colorscheme = { "gruvbox" } },
 	checker = { enabled = false },
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
 	rocks = { enabled = false },
 })
 

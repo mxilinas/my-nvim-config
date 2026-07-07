@@ -26,9 +26,6 @@ return {
 							return require("plugins.cmp-ai").status()
 						end,
 					},
-					{
-						require("extra.codecompanion-lualine"),
-					},
 				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },

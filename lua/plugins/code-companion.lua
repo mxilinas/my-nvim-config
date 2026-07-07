@@ -83,5 +83,36 @@ return {
 	},
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
+		local notify = require("notify")
+
+		local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
+
+		vim.api.nvim_create_autocmd({ "User" }, {
+			pattern = "*",
+			group = group,
+			callback = function(payload)
+				if payload.match == "CodeCompanionRequestStarted" then
+					notify(
+						payload.match
+							.. "\n"
+							.. "\t\t"
+							.. payload.data.adapter.model
+							.. "@"
+							.. payload.data.adapter.name,
+						"info"
+					)
+				end
+			end,
+		})
+
+		vim.api.nvim_create_autocmd({ "User" }, {
+			pattern = "*",
+			group = group,
+			callback = function(payload)
+				if payload.match == "CodeCompanionRequestFinished" then
+					notify(payload.match, "info")
+				end
+			end,
+		})
 	end,
 }
