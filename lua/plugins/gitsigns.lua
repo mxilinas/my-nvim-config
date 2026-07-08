@@ -59,6 +59,7 @@ return {
 				gitsigns.toggle_current_line_blame,
 				{ desc = "Toggle line blame", buf = bufnr }
 			)
+
 			vim.keymap.set("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "Toggle word diff", buf = bufnr })
 
 			vim.keymap.set({ "o", "x" }, "ih", gitsigns.select_hunk, { desc = "Select hunk", buf = bufnr })

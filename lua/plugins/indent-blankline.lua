@@ -6,13 +6,17 @@ return {
 	opts = {},
 	config = function()
 		require("ibl").setup({
+			indent = { char = "┊" },
 			exclude = {
 				filetypes = {
 					"dashboard",
 					"oil",
 				},
 			},
-			scope = { enabled = true },
+			scope = {
+				enabled = true,
+				show_exact_scope = false,
+			},
 		})
 	end,
 }

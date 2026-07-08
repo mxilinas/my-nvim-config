@@ -6,22 +6,22 @@ return {
 	},
 	config = function()
 		local cmp_ai = require("cmp_ai.config")
-        local notify = require("notify")
+		local notify = require("notify")
 		cmp_ai:setup({
 			max_lines = 100,
 			provider = "Ollama",
 			provider_options = {
 				auto_unload = false,
-				model = "qwen2.5-coder:3b-base-q6_K",
+				model = "qwen2.5-coder:7b-base",
 				prompt = function(lines_before, lines_after)
 					return "<|fim_prefix|>" .. lines_before .. "<|fim_suffix|>" .. lines_after .. "<|fim_middle|>"
 				end,
 			},
-			run_on_every_keystroke = true,
+			run_on_every_keystroke = false,
 			notify = true,
-            notify_callback = function (msg)
-                notify(msg, "info")
-            end
+			notify_callback = function(msg)
+				notify(msg, "info")
+			end,
 		})
 	end,
 }
