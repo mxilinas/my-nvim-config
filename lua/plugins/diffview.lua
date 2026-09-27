@@ -2,6 +2,18 @@ return {
 	"sindrets/diffview.nvim",
 	opts = {
 		use_icons = false,
+		file_panel = {
+			listing_style = "list", -- One of 'list' or 'tree'
+			win_config = {
+				position = "left",
+				width = 55,
+			},
+		},
+		view = {
+			default = {
+				layout = "diff2_vertical",
+			},
+		},
 	},
 	keys = {
 		{

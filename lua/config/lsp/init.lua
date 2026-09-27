@@ -1,12 +1,3 @@
-local function rm_map(lhs, modes, buf)
-	if type(modes) == "string" then
-		modes = { modes }
-	end
-	for _, mode in ipairs(modes) do
-		pcall(vim.keymap.del, mode, lhs, { buffer = buf })
-	end
-end
-
 --- Return the severity-level of the highest existing severity.
 local function get_max_severity()
 	local max_severity = vim.diagnostic.severity.HINT
@@ -109,10 +100,6 @@ local setup_lsp_attach = function(args)
 		},
 	})
 end
-
-rm_map("gri", "n")
-rm_map("gra", { "n", "v" })
-rm_map("grr", "n")
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = setup_lsp_attach,

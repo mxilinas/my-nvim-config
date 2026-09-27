@@ -6,6 +6,26 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	},
 	opts = {
+		pickers = {
+			buffers = {
+				entry_maker = function(entry)
+					local bufnr = entry.bufnr
+					local path = vim.api.nvim_buf_get_name(bufnr)
+					local relative_path = vim.fn.fnamemodify(path, ":.")
+					local lnum = entry.lnum or 1
+					local nickname = vim.b[bufnr].buf_nickname
+					return {
+						value = relative_path,
+						bufnr = bufnr,
+						lnum = lnum,
+						ordinal = string.format("[%d] : %s : %s", bufnr, relative_path, nickname or ""),
+						display = function(et)
+							return string.format("%s %s", et.value, nickname or "")
+						end,
+					}
+				end,
+			},
+		},
 		defaults = {
 			mappings = {
 				i = {
@@ -72,6 +92,7 @@ return {
 			{ "<leader>fi", builtin.lsp_incoming_calls, desc = "Telescope incoming" },
 			{ "<leader>fo", builtin.lsp_outgoing_calls, desc = "Telescope outgoing" },
 			{ "<leader>fs", builtin.lsp_document_symbols, desc = "Telescope symbols" },
+			{ "<leader>fw", builtin.lsp_workspace_symbols, desc = "Telescope workspace symbols" },
 			{ "<leader>fd", builtin.diagnostics, desc = "Telescope diagnostics" },
 		}
 	end,

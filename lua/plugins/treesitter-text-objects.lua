@@ -24,11 +24,7 @@ return {
 		end, { desc = "Select inner class" })
 
 		vim.keymap.set({ "x", "o" }, "is", function()
-			require("nvim-treesitter-textobjects.select").select_textobject("@block.inner", "locals")
-		end, { desc = "Select local scope" })
-
-		vim.keymap.set({ "x", "o" }, "as", function()
-			require("nvim-treesitter-textobjects.select").select_textobject("@block.outer", "locals")
+			require("nvim-treesitter-textobjects.select").select_textobject("@local.scope", "locals")
 		end, { desc = "Select local scope" })
 
 		vim.keymap.set("n", "<leader>a", function()

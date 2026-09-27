@@ -56,3 +56,35 @@ vim.api.nvim_create_autocmd("FileType", {
 		})
 	end,
 })
+
+local function rename_terminal(bufnr)
+	local job_id = vim.b[bufnr].terminal_job_id
+	if not job_id then
+		return
+	end
+
+	local pid = vim.fn.jobpid(job_id)
+	if pid <= 0 then
+		return
+	end
+
+	local ok, result = pcall(vim.system, { "ps", "-o", "comm=", "-p", tostring(pid) }):wait()
+	if not ok or result.code ~= 0 then
+		return
+	end
+
+	local process = vim.trim(result.stdout)
+	if process == "" then
+		return
+	end
+
+	vim.api.nvim_buf_set_name(bufnr, "term: " .. process)
+end
+
+vim.api.nvim_create_autocmd("TermResponse", {
+	callback = function(args)
+		vim.schedule(function()
+			rename_terminal(args.buf)
+		end)
+	end,
+})

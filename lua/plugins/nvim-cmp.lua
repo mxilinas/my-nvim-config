@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		{ "Gelio/cmp-natdat", config = true },
 		"neovim/nvim-lspconfig",
-		"tzachar/cmp-ai",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
@@ -15,6 +14,13 @@ return {
 		"L3MON4D3/LuaSnip",
 	},
 	config = function()
+
+        vim.g.cmp_enabled = true
+        vim.api.nvim_create_user_command("ToggleCmp", function ()
+            vim.g.cmp_enabled = not vim.g.cmp_enabled
+            require('cmp').setup.buffer { enabled = vim.g.cmp_enabled }
+        end, {})
+
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
@@ -45,16 +51,6 @@ return {
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<C-a>"] = cmp.mapping(
-					cmp.mapping.complete({
-						config = {
-							sources = cmp.config.sources({
-								{ name = "cmp_ai" },
-							}),
-						},
-					}),
-					{ "i" }
-				),
 				["<CR>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						if luasnip.expandable() then
