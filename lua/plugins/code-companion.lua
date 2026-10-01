@@ -1,9 +1,12 @@
+local local_model = "qwen2.5-coder:latest"
+
 return {
 	"olimorris/codecompanion.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
+	lazy = false,
 	opts = {
 		adapters = {
 			http = {
@@ -50,30 +53,47 @@ return {
 			inline = {
 				adapter = {
 					name = "ollama",
-					model = "qwen2.5-coder:latest",
+					model = local_model,
 				},
 			},
 			cmd = {
 				adapter = {
 					name = "ollama",
-					model = "qwen2.5-coder:latest",
+					model = local_model,
 				},
 			},
 			background = {
 				adapter = {
 					name = "ollama",
-					model = "qwen2.5-coder:latest",
+					model = local_model,
 				},
 			},
 			chat = {
 				adapter = {
 					name = "ollama",
-					model = "qwen2.5-coder:latest",
+					model = local_model,
+				},
+			},
+			cli = {
+				agent = "codex",
+				agents = {
+					codex = {
+						cmd = "codex",
+						args = {},
+						description = "Codex CLI",
+						provider = "terminal",
+					},
 				},
 			},
 		},
 	},
 	keys = {
+		{
+			"<leader>ca",
+			"<cmd>CodeCompanionChat Add<cr>",
+			desc = "Add the selection to chat.",
+			mode = { "n", "v" },
+		},
 		{
 			"<leader>cc",
 			"<cmd>CodeCompanionChat Toggle<cr>",
@@ -83,10 +103,10 @@ return {
 	},
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
+
+        -- Notifications
 		local notify = require("notify")
-
 		local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
-
 		vim.api.nvim_create_autocmd({ "User" }, {
 			pattern = "*",
 			group = group,
@@ -104,7 +124,6 @@ return {
 				end
 			end,
 		})
-
 		vim.api.nvim_create_autocmd({ "User" }, {
 			pattern = "*",
 			group = group,
@@ -112,6 +131,19 @@ return {
 				if payload.match == "CodeCompanionRequestFinished" then
 					notify(payload.match, "info")
 				end
+			end,
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "codecompanion",
+			callback = function()
+				vim.api.nvim_buf_set_keymap(
+					0,
+					"n",
+					"<leader>ca",
+					"<cmd>CodeCompanionActions<cr>",
+					{ noremap = true, silent = true }
+				)
 			end,
 		})
 	end,

@@ -1,7 +1,7 @@
 require("config.lazy-bootstrap")
 
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = "\\" -- Used for buffer-local mappings
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
@@ -11,6 +11,7 @@ require("lazy").setup({
 		notify = false,
 	},
 	rocks = { enabled = false },
+	colorscheme = "onedark",
 })
 
 require("config.autocommands")
