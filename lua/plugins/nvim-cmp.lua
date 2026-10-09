@@ -9,17 +9,15 @@ return {
 		"lukas-reineke/cmp-rg",
 		"hrsh7th/cmp-cmdline",
 		"amarakon/nvim-cmp-buffer-lines",
-		"hrsh7th/nvim-cmp",
 		"hrsh7th/cmp-calc",
 		"L3MON4D3/LuaSnip",
 	},
 	config = function()
-
-        vim.g.cmp_enabled = true
-        vim.api.nvim_create_user_command("ToggleCmp", function ()
-            vim.g.cmp_enabled = not vim.g.cmp_enabled
-            require('cmp').setup.buffer { enabled = vim.g.cmp_enabled }
-        end, {})
+		vim.g.cmp_enabled = true
+		vim.api.nvim_create_user_command("ToggleCmp", function()
+			vim.g.cmp_enabled = not vim.g.cmp_enabled
+			require("cmp").setup.buffer({ enabled = vim.g.cmp_enabled })
+		end, {})
 
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
@@ -30,7 +28,7 @@ return {
 					border = "rounded",
 					scrollbar = true,
 				}),
-				document_symbolmentation = cmp.config.window.bordered({
+				documentation = cmp.config.window.bordered({
 					border = "rounded",
 				}),
 			},
@@ -84,9 +82,6 @@ return {
 				end, { "i", "s" }),
 			}),
 			sources = {
-				per_filetype = {
-					codecompanion = { "codecompanion" },
-				},
 				{ name = "luasnip" },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },

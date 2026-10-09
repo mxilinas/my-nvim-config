@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 		vim.bo.fo = "tcroq"
 		vim.bo.tabstop = 2
 		vim.bo.shiftwidth = 2
-		vim.o.expandtab = true
+		vim.bo.expandtab = true
 	end,
 })
 
@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function(args)
 		vim.bo.tabstop = 2
 		vim.bo.shiftwidth = 2
-		vim.o.expandtab = true
+		vim.bo.expandtab = true
 		vim.keymap.set("n", "<leader>rr", "<Cmd>:w<Cr><Cmd>make run<Cr>", {
 			buffer = args.buf,
 			desc = "Run the current cpp file",

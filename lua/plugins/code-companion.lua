@@ -1,4 +1,5 @@
-local local_model = "qwen2.5-coder:latest"
+local fast_model = "qwen2.5-coder:latest"
+local agent_model = "qwen3.5:9b"
 
 return {
 	"olimorris/codecompanion.nvim",
@@ -6,7 +7,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 	},
-	lazy = false,
 	opts = {
 		adapters = {
 			http = {
@@ -18,8 +18,11 @@ return {
 				ollama = function()
 					return require("codecompanion.adapters").extend("ollama", {
 						schema = {
+							keep_alive = {
+								default = "30m",
+							},
 							num_ctx = {
-								default = 8192,
+								default = 65536,
 							},
 						},
 					})
@@ -47,31 +50,31 @@ return {
 			},
 		},
 		opts = {
-			log_level = "DEBUG",
+			log_level = "WARN",
 		},
 		interactions = {
 			inline = {
 				adapter = {
 					name = "ollama",
-					model = local_model,
+					model = fast_model,
 				},
 			},
 			cmd = {
 				adapter = {
 					name = "ollama",
-					model = local_model,
+					model = fast_model,
 				},
 			},
 			background = {
 				adapter = {
 					name = "ollama",
-					model = local_model,
+					model = fast_model,
 				},
 			},
 			chat = {
 				adapter = {
 					name = "ollama",
-					model = local_model,
+					model = agent_model,
 				},
 			},
 			cli = {
@@ -87,28 +90,58 @@ return {
 			},
 		},
 	},
-	keys = {
-		{
-			"<leader>ca",
-			"<cmd>CodeCompanionChat Add<cr>",
-			desc = "Add the selection to chat.",
-			mode = { "n", "v" },
-		},
-		{
-			"<leader>cc",
-			"<cmd>CodeCompanionChat Toggle<cr>",
-			desc = "Toggle CodeCompanionChat",
-		},
-		{ "<leader>ci", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "Inline code edit" },
-	},
 	config = function(_, opts)
 		require("codecompanion").setup(opts)
 
-        -- Notifications
+		-- Keybinds
+		vim.api.nvim_set_keymap(
+			"v",
+			"<leader>ca",
+			"<cmd>CodeCompanionChat Add<cr>",
+			{ desc = "Add the selection to chat." }
+		)
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>cc",
+			"<cmd>CodeCompanionChat Toggle<cr>",
+			{ desc = "Toggle CodeCompanionChat" }
+		)
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>cC",
+			"<cmd>CodeCompanionChat Toggle adapter=codex<cr>",
+			{ desc = "Toggle Codex CodeCompanionChat" }
+		)
+
+		vim.api.nvim_set_keymap(
+			"v",
+			"<leader>ci",
+			"<cmd>CodeCompanion<cr>",
+			{ desc = "Inline code edit"}
+		)
+
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "codecompanion",
+			callback = function()
+				vim.api.nvim_buf_set_keymap(
+					0,
+					"n",
+					"<leader>ca",
+					"<cmd>CodeCompanionActions<cr>",
+					{ noremap = true, silent = true }
+				)
+			end,
+		})
+
+		-- Notifications
 		local notify = require("notify")
+
 		local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
+
 		vim.api.nvim_create_autocmd({ "User" }, {
-			pattern = "*",
+			pattern = "CodeCompanion*",
 			group = group,
 			callback = function(payload)
 				if payload.match == "CodeCompanionRequestStarted" then
@@ -121,29 +154,9 @@ return {
 							.. payload.data.adapter.name,
 						"info"
 					)
-				end
-			end,
-		})
-		vim.api.nvim_create_autocmd({ "User" }, {
-			pattern = "*",
-			group = group,
-			callback = function(payload)
-				if payload.match == "CodeCompanionRequestFinished" then
+				elseif payload.match == "CodeCompanionRequestFinished" then
 					notify(payload.match, "info")
 				end
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "codecompanion",
-			callback = function()
-				vim.api.nvim_buf_set_keymap(
-					0,
-					"n",
-					"<leader>ca",
-					"<cmd>CodeCompanionActions<cr>",
-					{ noremap = true, silent = true }
-				)
 			end,
 		})
 	end,

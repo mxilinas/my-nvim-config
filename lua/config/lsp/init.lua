@@ -19,7 +19,7 @@ local setup_lsp_attach = function(args)
 		return
 	end
 
-	vim.o.signcolumn = "yes"
+	vim.wo.signcolumn = "yes"
 	vim.o.winborder = "single"
 
 	wk.add({
@@ -40,6 +40,7 @@ local setup_lsp_attach = function(args)
 				end)
 			end,
 			desc = "Next diagnostic",
+			buffer = 0,
 		},
 		{
 			"[d",
@@ -58,17 +59,18 @@ local setup_lsp_attach = function(args)
 				end)
 			end,
 			desc = "Previous diagnostic",
+			buffer = 0,
 		},
 		-- LSP actions
-		{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol" },
-		{ "<f3>", vim.lsp.buf.code_action, desc = "Code action" },
-		{ "gd", vim.lsp.buf.definition, desc = "Go to definition" },
-		{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
-		{ "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },
-		{ "<leader>lr", vim.lsp.buf.references, desc = "Show references" },
-		{ "<leader>li", vim.lsp.buf.implementation, desc = "Show impl." },
-		{ "<leader>lt", vim.lsp.buf.type_definition, desc = "Go to type definition" },
-		{ "<leader>ls", vim.lsp.buf.document_symbol, desc = "Show document symbols" },
+		{ "<leader>rn", vim.lsp.buf.rename, desc = "Rename symbol", buffer = 0 },
+		{ "<f3>", vim.lsp.buf.code_action, desc = "Code action", buffer = 0 },
+		{ "gd", vim.lsp.buf.definition, desc = "Go to definition", buffer = 0 },
+		{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration", buffer = 0 },
+		{ "gi", vim.lsp.buf.implementation, desc = "Go to implementation", buffer = 0 },
+		{ "<leader>lr", vim.lsp.buf.references, desc = "Show references", buffer = 0 },
+		{ "<leader>li", vim.lsp.buf.implementation, desc = "Show impl.", buffer = 0 },
+		{ "<leader>lt", vim.lsp.buf.type_definition, desc = "Go to type definition", buffer = 0 },
+		{ "<leader>ls", vim.lsp.buf.document_symbol, desc = "Show document symbols", buffer = 0 },
 		{
 			"K",
 			function()
@@ -78,6 +80,7 @@ local setup_lsp_attach = function(args)
 				})
 			end,
 			desc = "Hover documentation",
+			buffer = 0,
 		},
 		{
 			"gl",
@@ -87,6 +90,7 @@ local setup_lsp_attach = function(args)
 				})
 			end,
 			desc = "Show diagnostics",
+			buffer = 0,
 		},
 		{
 			"<C-k>",
@@ -97,6 +101,7 @@ local setup_lsp_attach = function(args)
 			end,
 			desc = "Signature help",
 			mode = "i",
+			buffer = 0,
 		},
 	})
 end

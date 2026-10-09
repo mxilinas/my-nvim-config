@@ -20,14 +20,6 @@ return {
 						end,
 					},
 				},
-				lualine_x = {
-					"filetype",
-					{
-						function()
-							return require("plugins.cmp-ai").status()
-						end,
-					},
-				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},

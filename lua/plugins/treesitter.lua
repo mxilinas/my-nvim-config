@@ -18,6 +18,9 @@ return {
 			"python",
 			"cpp",
 			"css",
+            "yaml",
+            "markdown",
+            "markdown_inline",
 		}
 
 		local already_installed = require("nvim-treesitter.config").get_installed()
